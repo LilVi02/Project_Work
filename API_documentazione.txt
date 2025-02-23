@@ -1,0 +1,155 @@
+##############################
+# DOCUMENTAZIONE API  #
+##############################
+
+🔐 AUTENTICAZIONE
+------------------
+
+[POST] /register
+- Registra un nuovo utente
+- Headers: {"Content-Type": "application/json"}
+- Body:
+  {
+    "email": "obbligatorio",
+    "password": "obbligatorio",
+    "full_name": "opzionale",
+    "role": "opzionale (default: user)"
+  }
+- Risposte:
+  - 201 Created: { "message": "Registrazione completata" }
+  - 400 Bad Request: { "message": "Dati mancanti" }
+  - 409 Conflict: { "message": "Email già registrata" }
+
+[POST] /login
+- Genera token JWT
+- Body:
+  {
+    "email": "user@example.com",
+    "password": "password123"
+  }
+- Risposta OK (200):
+  {
+    "token": "eyJhbGci...",
+    "user": { "email": "...", "role": "user/admin" }
+  }
+- Errori: 401 Unauthorized
+
+[GET] /verify-token
+- Verifica validità token
+- Headers: {"Authorization": "Bearer <token>"}
+- Risposta OK (200): Dettagli utente autenticato
+
+📑 PRENOTAZIONI
+----------------
+
+[GET] /bookings
+- Ottieni tutte le prenotazioni (admin) o specifica
+- Parametri query:
+  ?email=user@example.com (filtra per email)
+  ?code=ABC123 (filtra per codice prenotazione)
+- Risposta OK (200): Array di prenotazioni
+  [{
+    "id": 1,
+    "user_email": "...",
+    "car_name": "...",
+    "booking_code": "a1b2c3d4",
+    "status": "active/cancelled",
+    "total_price": 450.00
+  }]
+
+[POST] /bookings
+- Crea nuova prenotazione
+- Campi obbligatori nel body:
+  {
+    "user_email": "...",
+    "car_name": "...",
+    "pickup_location": "...",
+    "return_location": "...",
+    "start_date": "YYYY-MM-DDTHH:MM:SS",
+    "end_date": "YYYY-MM-DDTHH:MM:SS",
+    "total_price": 300.00,
+    "car_type": "SUV/Berlina...",
+    "car_seats": 5,
+    "car_transmission": "Automatico/Manuale",
+    "car_fuel": "Benzina/Diesel...",
+    "car_year": 2023
+  }
+- Risposta OK (201): 
+  {
+    "booking_code": "a1b2c3d4",
+    "daily_price": 60.00,
+    "email_sent": true/false
+  }
+
+[DELETE] /bookings/<int:id>
+- Cancella prenotazione (SOLO ADMIN)
+- Headers: {"Authorization": "Bearer <admin-token>"}
+- Risposta OK (200): { "message": "Prenotazione cancellata" }
+
+[PUT/DELETE] /bookings/<string:booking_code>
+- Modifica/Cancella prenotazione (utente proprietario)
+- Headers: {"Authorization": "Bearer <token>"}
+- Body (PUT): 
+  {
+    "pickup_location": "...",
+    "return_location": "...",
+    "start_date": "...",
+    "end_date": "..."
+  }
+- Risposta OK (200): Conferma modifica/cancellazione
+
+🌐 FRONTEND
+------------
+
+[GET] /
+- Restituisce index.html
+
+[GET] /<path:path>
+- Restituisce file statici (CSS/JS/immagini)
+
+🛠️ DETTAGLI TECNICI
+---------------------
+- Autenticazione: JWT con scadenza 2 ore
+- Ruoli: 
+  - User: Gestione prenotazioni personali
+  - Admin: Cancellazione globale prenotazioni
+- Database: SQLite (file rental.db)
+- Email: Conferme inviate via SendGrid
+
+⚠️ CODICI DI ERRORE
+--------------------
+- 401 Unauthorized: Token mancante/scaduto
+- 403 Forbidden: Permessi insufficienti (es. utente non admin)
+- 404 Not Found: Prenotazione non esistente
+- 500 Internal Server Error: Errore generico server
+
+📜 ESEMPI 
+---------------
+
+# Login
+curl -X POST http://localhost:5000/login \
+-H "Content-Type: application/json" \
+-d '{"email":"user@test.com","password":"password123"}'
+
+# Crea prenotazione
+curl -X POST http://localhost:5000/bookings \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <token>" \
+-d '{
+  "user_email": "user@test.com",
+  "car_name": "Fiat 500",
+  "pickup_location": "Roma Fiumicino",
+  "return_location": "Roma Fiumicino",
+  "start_date": "2024-06-15T10:00:00",
+  "end_date": "2024-06-20T10:00:00",
+  "total_price": 250.00,
+  "car_type": "Citycar",
+  "car_seats": 4,
+  "car_transmission": "Manuale",
+  "car_fuel": "Benzina",
+  "car_year": 2022
+}'
+
+# Elimina prenotazione (admin)
+curl -X DELETE http://localhost:5000/bookings/1 \
+-H "Authorization: Bearer <admin-token>"
