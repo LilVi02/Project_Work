@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <!-- Definizione della codifica dei caratteri per il documento -->
+  <meta charset="UTF-8" />
+  <!-- Impostazioni di visualizzazione per dispositivi mobili: il sito sarà responsivo, adattandosi alla larghezza dello schermo -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Titolo della pagina che appare nella barra del browser o nella scheda -->
+  <title>Gestione Prenotazioni</title>
+
+  <!-- Inclusione di Bootstrap per lo stile della pagina -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+</head>
+
+<body class="container my-5">
+  <!-- Contenitore principale con margini personalizzati. "my-5" aggiunge margini superiori e inferiori. -->
+
+  <h2>Gestione Prenotazioni</h2>
+  <!-- Intestazione della pagina con il titolo principale -->
+
+  <!-- Creazione della tabella per visualizzare le prenotazioni -->
+  <table class="table table-striped">
+    <!-- La classe "table" fornisce uno stile base per la tabella, e "table-striped" aggiunge strisce alternate alle righe per migliorarne la leggibilità -->
+
+    <thead>
+      <!-- Intestazione della tabella con le colonne -->
+      <tr>
+        <th>ID</th>
+        <th>Utente</th>
+        <th>Email</th>
+        <th>Auto</th>
+        <th>Codice Prenotazione</th>
+        <th>Ritiro</th>
+        <th>Restituzione</th>
+        <th>Totale</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+
+    <tbody id="bookingTableBody">
+      <!-- Corpo della tabella dove vengono visualizzati dinamicamente i dati delle prenotazioni -->
+      <!-- L'id "bookingTableBody" permette di manipolare facilmente il contenuto della tabella con JavaScript -->
+    </tbody>
+  </table>
+
+  <!-- Inclusione di uno script personalizzato per la gestione delle prenotazioni (admin.js) -->
+  <script src="admin.js"></script>
+</body>
+
+</html>

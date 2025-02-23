@@ -1,0 +1,1327 @@
+/* Stili di base per il layout generale */
+body {
+  min-height: 100vh;
+}
+
+/* Card base senza bordi con transizione fluida */
+.card {
+  border: none;
+  transition: var(--transition);
+}
+
+
+
+/* Stile per le card delle auto con effetto overflow nascosto e layout flessibile */
+.car-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Immagini delle auto con altezza fissa e effetto di transizione */
+.car-card img {
+  height: 200px;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.car-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Etichetta del prezzo posizionata in alto a destra con sfondo semi-trasparente */
+.price-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(5, 80, 159, 0.91);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  margin-bottom: 8px;
+}
+
+.feature-list i {
+  color: var(--bs-primary);
+  margin-right: 10px;
+}
+
+/* Stili per il menu di autocompletamento */
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  /* Posiziona il dropdown sotto l'input */
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+
+.input-group {
+  position: relative;
+  /* Contenitore di riferimento per il dropdown */
+}
+
+.autocomplete-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  background: #fff;
+  color: #212529;
+}
+
+.autocomplete-item:hover {
+  background: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.autocomplete-item i {
+  margin-right: 0.75rem;
+  color: #0d6efd;
+  width: 20px;
+}
+
+/* Aggiungi transizione agli input */
+.input-field {
+  transition: all 0.3s ease !important;
+}
+
+/* Mostra il dropdown quando attivo */
+.input-field:focus~.autocomplete-dropdown,
+.autocomplete-dropdown:hover {
+  display: block !important;
+}
+
+
+
+
+.flatpickr-calendar {
+  border-radius: 8px !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.flatpickr-day.selected {
+  background: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+#carList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.car-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+/* Stili per il menu utente e dropdown */
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.dropdown-header {
+  font-size: 0.85em;
+  color: #666;
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-divider {
+  margin: 0.3rem 0;
+}
+
+
+/* Stili per il contenuto principale della pagina */
+
+#mainContent {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 2rem !important;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Adatta lo stile per schermi piccoli */
+@media (max-width: 768px) {
+  #mainContent {
+    border-radius: 12px;
+    margin: 1rem;
+    padding: 1.5rem !important;
+  }
+}
+
+/* Stili per la visualizzazione dei dati della prenotazione */
+.bg-gradient-primary-to-secondary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+}
+
+.btn-gradient-primary-to-secondary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-primary-to-secondary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.rounded-bl-3 {
+  border-bottom-left-radius: 1rem !important;
+}
+
+
+.list-group-item span {
+  margin-right: 0;
+  /* Rimuove margini extra a destra */
+  flex-grow: 1;
+  /* Fai sì che il testo prenda tutto lo spazio disponibile */
+}
+
+.list-group-item strong {
+  text-align: left;
+  /* Allinea il contenuto di strong a sinistra */
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0;
+  /* Rimuove padding a sinistra */
+  padding-right: 10px;
+  /* Aggiungi padding se necessario per distanziare la parte destra */
+}
+
+
+
+html,
+body {
+  height: 100%;
+  /* Assicurati che l'altezza del body sia al 100% */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Imposta la direzione del layout in colonna */
+}
+
+main {
+  flex: 1;
+  /* Permette al main di occupare lo spazio disponibile */
+}
+
+
+
+
+
+
+/* Stili per la finestra modale di pagamento */
+.bg-gradient-primary-to-secondary {
+  background: linear-gradient(135deg, #0d6efd, #198754) !important;
+}
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 260px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0d6efd;
+  opacity: 0.7;
+}
+
+
+
+.card-border-primary {
+  border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+.modal-header .btn-close-white {
+  filter: invert(1);
+}
+
+
+
+.fa-solid {
+  margin-right: 10px;
+}
+
+.fas {
+  margin-right: 5px;
+}
+
+/* Stili per il pulsante di pagamento con effetti di hover */
+.btn-payment {
+  background: linear-gradient(135deg, #0d6efd 0%, #198754 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 12px 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(13, 110, 253, 0.2);
+}
+
+.btn-payment:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px rgba(13, 110, 253, 0.3);
+  background: linear-gradient(135deg, #198754 0%, #0d6efd 100%);
+}
+
+.btn-payment:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
+}
+
+.btn-payment i {
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+}
+
+.btn-payment:hover i {
+  transform: scale(1.1);
+}
+
+.btn-payment:focus {
+  outline: none;
+  background: linear-gradient(135deg, #0b5ed7 0%, #157347 100%);
+}
+
+
+
+
+/* Stile migliorato per il pulsante "Chiudi" */
+.btn-close-modal {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.btn-close-modal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(108, 117, 125, 0.3);
+  background: linear-gradient(135deg, #495057, #343a40);
+  color: white !important;
+  /* Forza il colore del testo a rimanere bianco */
+
+}
+
+.btn-close-modal:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(108, 117, 125, 0.2);
+}
+
+.btn-close-modal i {
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+.btn-close-modal:hover i {
+  transform: scale(1.1);
+}
+
+.btn-close-modal:focus {
+  outline: none;
+  background: linear-gradient(135deg, #5a6268, #343a40);
+}
+
+
+
+/* Miglioramenti estetici per la finestra modale di login */
+
+#loginModal .modal-dialog {
+  margin-top: -6vh;
+  /* Aumenta o riduci il valore per regolare la posizione */
+}
+
+#loginModal .modal-content {
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+#loginModal .modal-header {
+  padding: 2rem 2rem 3rem;
+}
+
+#loginModal .wave-divider {
+  height: 20px;
+}
+
+#loginModal .nav-pills .nav-link {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #212529;
+  /* Colore scuro per migliorare la visibilità */
+  transition: all 0.3s ease;
+}
+
+#loginModal .nav-pills .nav-link.active {
+  background: white !important;
+  color: var(--bs-primary) !important;
+  border-image: linear-gradient(135deg, #0d6efd, #198754) 1;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+
+#loginModal .input-group-text {
+  border: none;
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  min-width: 45px;
+  justify-content: center;
+}
+
+#loginModal .form-control {
+  border: 2px solid rgba(var(--bs-primary-rgb), 0.15);
+  transition: all 0.3s ease;
+}
+
+#loginModal .form-control:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 3px rgba(var(--bs-primary-rgb), 0.2);
+}
+
+#loginModal .btn-gradient-primary-to-secondary {
+  background-size: 200% auto;
+  transition: 0.5s;
+}
+
+#loginModal .btn-gradient-primary-to-secondary:hover {
+  background-position: right center;
+}
+
+
+
+
+
+
+
+/* Stili per i messaggi di alert personalizzati con diversi stati (successo, errore, avviso) */
+#customAlert {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-left: 4px solid;
+}
+
+#customAlert.success {
+  background: #d1e7dd;
+  border-color: #0f5132;
+  color: #0f5132;
+}
+
+#customAlert.error {
+  background: #f8d7da;
+  border-color: #842029;
+  color: #842029;
+}
+
+#customAlert.warning {
+  background: #fff3cd;
+  border-color: #664d03;
+  color: #664d03;
+}
+
+#alertIcon {
+  font-size: 1.8rem;
+  display: inline-block;
+  width: 32px;
+  text-align: center;
+}
+
+
+.alert:not(.show) {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+
+
+
+
+/* Stili per la sezione dei metodi di pagamento con tabs e form */
+#paymentTabs {
+  border-bottom: 2px solid #e9ecef;
+  gap: 0.5rem;
+}
+
+#paymentTabs .nav-link {
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+#paymentTabs .nav-link:hover {
+  background-color: #f8f9fa;
+}
+
+#paymentTabs .nav-link.active {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+  color: white;
+}
+
+/* Stili per il form della carta */
+.input-group-text img {
+  height: 20px;
+}
+
+/* Stili per i pulsanti di pagamento digitale */
+.btn-dark.rounded-pill {
+  background: #000;
+  border: none;
+  padding: 1rem 2rem;
+}
+
+.btn-primary.rounded-pill {
+  background: #4285f4;
+  border: none;
+  padding: 1rem 2rem;
+}
+
+/* Animazioni per i tab */
+.tab-pane {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.tab-pane.fade {
+  opacity: 0;
+}
+
+.tab-pane.fade.show {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+/* Nasconde gli elementi del traduttore Google per una migliore esperienza utente */
+.goog-te-gadget,
+.goog-logo-link,
+.goog-te-spinner-pos,
+#goog-gt-tt {
+  display: none !important;
+}
+
+
+/* Corregge lo spostamento del contenuto */
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+/* Nasconde l'iframe del traduttore */
+iframe[src*="translate.googleapis.com"] {
+  display: none !important;
+}
+
+
+
+.goog-te-combo {
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.skiptranslate {
+  display: none !important;
+}
+
+
+
+
+/* Elementi che non devono essere tradotti */
+.notranslate {
+  -webkit-translate: none !important;
+  -moz-translate: none !important;
+  -ms-translate: none !important;
+  -o-translate: none !important;
+  translate: none !important;
+}
+
+[translate="no"] {
+  -webkit-translate: none !important;
+  -moz-translate: none !important;
+  -ms-translate: none !important;
+  -o-translate: none !important;
+  translate: none !important;
+}
+
+
+
+/* Stili per il form di contatto nella finestra modale */
+#contactModal textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+#contactModal .modal-header {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#contactModal .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+
+
+
+/* Stili per il form di gestione delle prenotazioni */
+#searchModal .modal-content {
+  border-radius: 12px;
+}
+
+#searchModal .form-control {
+  border: 2px solid #e9ecef;
+}
+
+#searchModal .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: none;
+}
+
+
+
+
+/* Stili per la visualizzazione dei dettagli della prenotazione */
+
+#bookingDetails .card {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#bookingDetails .badge {
+  font-weight: 500;
+}
+
+#bookingDetails .list-group-item {
+  padding: 1rem 0;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+#bookingDetails .text-muted {
+  color: #666 !important;
+}
+
+
+
+/* Stili per la barra di navigazione con effetti moderni */
+
+/* Navbar Modernizzata */
+.navbar {
+  padding: 0;
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.animate-wobble {
+  animation: wobble 2s infinite;
+}
+
+@keyframes wobble {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(3deg);
+  }
+
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  padding: 0.5rem 1rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hover-underline {
+  position: relative;
+  padding: 0.5rem 1rem !important;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Menu a tendina moderno */
+.dropdown-menu {
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(13, 110, 253, 0.1) !important;
+  color: #0d6efd !important;
+  padding-left: 2rem !important;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .navbar-collapse {
+    background: rgba(13, 110, 253, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 15px;
+  }
+
+  .nav-link {
+    justify-content: center;
+    padding: 1rem !important;
+  }
+}
+
+
+
+
+
+
+
+/* Stili per le icone nella barra di navigazione */
+.auth-btn {
+  position: relative;
+  padding-left: 2.5rem !important;
+  min-width: 120px;
+  transition: all 0.3s ease;
+}
+
+.auth-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+  margin-right: 0 !important;
+}
+
+.auth-text {
+  display: inline-block;
+  margin-left: 5px;
+  transition: opacity 0.3s ease;
+}
+
+/* Mantieni lo stile al passaggio del mouse */
+.auth-btn:hover .auth-icon {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Animazione durante la traduzione */
+.auth-text {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Forza il layout RTL per prevenire spostamenti */
+[dir="rtl"] .auth-icon {
+  right: 15px;
+  left: auto;
+}
+
+
+
+
+
+
+/* Stili per la finestra modale di ricerca con effetti di animazione */
+#searchModal .modal-content {
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
+}
+
+#searchModal .modal-header {
+  padding: 1.5rem;
+}
+
+#searchModal .wave-divider {
+  height: 20px;
+}
+
+#searchModal .form-control {
+  border: 1px solid #dee2e6 !important;
+  /* Bordi di base */
+  transition: border-color 0.3s ease-in-out;
+  /* Aggiungi una transizione */
+}
+
+#searchModal .form-control:hover {
+  border-color: #0d6efd !important;
+  /* Colore del bordo al passaggio del mouse */
+}
+
+#searchModal .input-group-text {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: #dee2e6 !important;
+  min-width: 45px;
+  justify-content: center;
+}
+
+#searchModal .form-control {
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+#searchModal .form-control:focus {
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+  border-color: #0d6efd;
+}
+
+#searchModal .btn-gradient-primary-to-secondary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#searchModal .btn-gradient-primary-to-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
+#searchModal .btn-gradient-primary-to-secondary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 75%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Stili avviso codice prenotazione */
+#searchModal .border-top {
+  border-color: rgba(13, 110, 253, 0.2) !important;
+}
+
+#searchModal .text-muted {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+#searchModal .fa-circle-info {
+  font-size: 0.9em;
+  vertical-align: middle;
+}
+
+
+
+
+/* Stili per la Contact Modal */
+#contactModal .modal-content {
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
+}
+
+#contactModal .modal-header {
+  padding: 1.5rem;
+}
+
+#contactModal .wave-divider {
+  height: 20px;
+}
+
+#contactModal .form-control {
+  border: 1px solid #dee2e6 !important;
+  /* Bordi di base */
+  transition: border-color 0.3s ease-in-out;
+  /* Aggiungi una transizione */
+}
+
+#contactModal .form-control:hover {
+  border-color: #0d6efd !important;
+  /* Colore del bordo al passaggio del mouse */
+}
+
+#contactModal .input-group-text {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: #dee2e6 !important;
+  min-width: 45px;
+  justify-content: center;
+}
+
+#contactModal .form-control {
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+#contactModal .form-control:focus {
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+  border-color: #0d6efd;
+}
+
+#contactModal .btn-gradient-primary-to-secondary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#contactModal .btn-gradient-primary-to-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
+#contactModal .btn-gradient-primary-to-secondary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 75%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+
+
+
+
+
+
+/* Stili per la sezione di ricerca auto con layout a griglia e effetti interattivi */
+/* Struttura Base */
+.innovative-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  position: relative;
+  background: rgba(13, 110, 253, 0.03);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+}
+
+.input-group:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.1);
+  border-color: rgba(13, 110, 253, 0.15);
+}
+
+.input-field {
+  background: none !important;
+  border: none !important;
+  height: 85px;
+  padding: 1.5rem 1rem 0.5rem 3rem !important;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  box-shadow: none !important;
+}
+
+.input-label {
+  position: absolute;
+  top: 12px;
+  left: 3rem;
+  color: #666;
+  font-size: 0.9em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  transform-origin: left center;
+}
+
+.input-field:focus~.input-label,
+.input-field:not(:placeholder-shown)~.input-label {
+  transform: translateY(-18px) scale(0.85);
+  color: #0d6efd;
+}
+
+#searchModal .input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0d6efd;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.input-field:focus~.input-icon {
+  opacity: 1;
+}
+
+/* Autocomplete Funzionante */
+.autocomplete-dropdown {
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+}
+
+.autocomplete-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.autocomplete-item:hover {
+  background: rgba(13, 110, 253, 0.05);
+}
+
+
+
+/* Effetto hover avanzato */
+.hover-scale-animation:hover .circle-border {
+  box-shadow: 0 0 15px rgba(13, 110, 253, 0.2);
+}
+
+.hover-scale-animation:hover .circle-border i {
+  transform: rotate(-15deg);
+}
+
+
+.search-header:hover .fa-magnifying-glass {
+  opacity: 1;
+  transform: translateX(10px) scale(1);
+}
+
+.search-header:hover .fa-car-side {
+  transform: translateX(-20px);
+}
+
+/* Pulsante CTA */
+.cta-button {
+  position: relative;
+  background: #0d6efd;
+  border: none;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.button-overlay {
+  position: absolute;
+  width: 150%;
+  height: 200%;
+  background: linear-gradient(45deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 75%);
+  top: -50%;
+  left: -125%;
+  transform: rotate(15deg);
+  transition: all 0.6s ease;
+}
+
+.cta-button:hover .button-overlay {
+  left: 150%;
+}
+
+.button-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+
+
+
+
+
+
+/* Stili generali del modale */
+#paymentModal .modal-content {
+  border-radius: 10px;
+}
+
+
+#paymentModal .modal-header {
+  border-bottom: 1px solid #dee2e6;
+}
+
+#paymentModal .modal-footer {
+  border-top: 1px solid #dee2e6;
+}
+
+/* Stili per le card */
+#paymentModal .card {
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#paymentModal .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 8px 8px 0 0;
+}
+
+#paymentModal .card-body {
+  padding: 20px;
+}
+
+/* Stili per i form label */
+#paymentModal .form-label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+/* Stili per gli input */
+#paymentModal .form-control {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#paymentModal .form-control:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Stili per gli input icon */
+#paymentModal .input-icon {
+  position: relative;
+}
+
+#paymentModal .input-icon i {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: 10px !important;
+  pointer-events: none !important;
+}
+
+/* Stili per i select */
+#paymentModal .form-select {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#paymentModal .form-select:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Stili per i pulsanti */
+#paymentModal .btn-close-modal {
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+#paymentModal .btn-close-modal:hover {
+  background-color: #d8dbe0;
+  border-color: #c2c6cb;
+  color: inherit;
+}
+
+#paymentModal .btn-payment {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+#paymentModal .btn-payment:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+/* Stili per i tab di pagamento */
+#paymentModal .nav-pills .nav-link {
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 5px;
+  color: #495057;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+#paymentModal .nav-pills .nav-link.active {
+  background-color: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+#paymentModal .tab-content {
+  margin-top: 20px;
+}
+
+/* Stili specifici per i tab di Apple Pay e Google Pay */
+#paymentModal #apple-pay .btn-dark {
+  background-color: #000;
+  border-color: #000;
+}
+
+#paymentModal #apple-pay .btn-dark:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+#paymentModal #google-pay .btn-primary {
+  background-color: #4285f4;
+  border-color: #4285f4;
+}
+
+#paymentModal #google-pay .btn-primary:hover {
+  background-color: #357ae8;
+  border-color: #357ae8;
+}
+
+/* Stili per flatpickr */
+
+#paymentModal .flatpickr-input {
+  background-color: white;
+}
+
+/*Stili per numero di cellulare e CAP*/
+#paymentModal input[inputmode="numeric"] {
+  text-align: left;
+}

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <!-- Definizione della codifica caratteri UTF-8 per supportare caratteri speciali -->
+    <meta charset="UTF-8">
+    <!-- Impostazione viewport per renderizzare responsive su dispositivi mobili -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Titolo della pagina visualizzato nel browser -->
+    <title>AUTORENT24/7</title>
+
+    <!-- Collegamento a Bootstrap 5 per stili predefiniti e componenti responsive -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS per Flatpickr (libreria di selezione date/orario) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Font Awesome per icone vettoriali -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Foglio di stile personalizzato del progetto -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Script per la gestione del widget di traduzione Google -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'it', // Lingua base della pagina (italiano)
+                includedLanguages: 'en,es,fr', // Lingue disponibili per la traduzione
+                autoDisplay: false, // Disabilita la traduzione automatica
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL // Layout orizzontale
+            }, 'google_translate_element');
+
+            // Nasconde il widget della traduzione se la lingua selezionata è italiano
+            const currentLang = localStorage.getItem("selectedLanguage") || "it";
+            if (currentLang === "it") {
+                document.querySelector(".goog-te-gadget").style.display = "none";
+            }
+        }
+    </script>
+
+    <!-- Script ufficiale Google Translate con callback all'inizializzazione -->
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body class="bg-light">
+    <!-- Navbar Principale -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm" style="
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%); /* Sfondo gradiente blu */
+    backdrop-filter: blur(10px); /* Effetto vetro smerigliato */
+    height: 80px; /* Altezza fissa della navbar */
+">
+        <div class="container">
+            <!-- Logo/Marca con effetti hover -->
+            <a class="navbar-brand fw-bold d-flex align-items-center hover-scale" href="#"
+                style="font-size: 1.5rem; transition: all 0.3s ease;">
+                <i class="fa-solid fa-car-side fs-4 me-2 animate-wobble"></i>
+                <!-- Icona auto animata -->
+                <span class="notranslate" translate="no">AUTORENT24/7</span>
+                <!-- Testo non traducibile -->
+            </a>
+
+            <!-- Hamburger Menu personalizzato (3 linee) -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" style="padding: 0.5rem;">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Contenuto della Navbar (collapse) -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <!-- Sezione Link di Navigazione -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 0.5rem;">
+                    <!-- Link Admin (nascosto di default) -->
+                    <li class="nav-item" id="adminLink" style="display: none;">
+                        <a class="nav-link d-flex align-items-center glass-effect" href="admin.html" target="_blank">
+                            <i class="fa-solid fa-gear me-2"></i>Gestione
+                        </a>
+                    </li>
+
+                    <!-- Pulsante Modale di Ricerca -->
+                    <li class="nav-item">
+                        <button class="nav-link d-flex align-items-center bg-transparent border-0 hover-underline"
+                            data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <i class="fa-solid fa-magnifying-glass me-2"></i>Cerca
+                            Prenotazione
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Sezione Controlli Destra -->
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Widget Google Translate -->
+                    <div id="google_translate_element" class="d-inline-block"></div>
+
+                    <!-- Dropdown Selezione Lingua -->
+                    <div class="dropdown">
+                        <button class="btn btn-link text-white dropdown-toggle d-flex align-items-center" type="button"
+                            data-bs-toggle="dropdown" style="text-decoration: none;">
+                            <i class="fa-solid fa-globe me-2"></i>
+                            <span id="currentLanguage">IT</span>
+                            <!-- Lingua corrente -->
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <!-- Opzioni lingua con chiamata JS -->
+                            <li><a class="dropdown-item" href="#" onclick="translatePage('it')">Italiano</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="translatePage('en')">English</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="translatePage('es')">Español</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="translatePage('fr')">Français</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Separatore verticale (solo desktop) -->
+                    <div class="vr text-white opacity-75 d-none d-lg-block"></div>
+
+                    <!-- Dropdown Assistenza -->
+                    <div class="dropdown">
+                        <button class="btn btn-link text-white dropdown-toggle d-flex align-items-center" type="button"
+                            data-bs-toggle="dropdown" style="text-decoration: none;">
+                            <i class="fa-solid fa-circle-question me-2"></i>Aiuto
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">
+                                    <i class="fa-solid fa-comments me-2"></i>Chat
+                                </a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">
+                                    <i class="fa-solid fa-envelope me-2"></i>Contattaci
+                                </a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Separatore verticale (solo desktop) -->
+                    <div class="vr text-white opacity-75 d-none d-lg-block"></div>
+
+                    <!-- Sezione Autenticazione Utente -->
+                    <div id="userMenu" class="me-2"></div>
+                    <!-- Dinamico via JS -->
+                    <div id="authSection">
+                        <button class="btn btn-outline-light rounded-pill auth-btn" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">
+                            <i class="fa-solid fa-user auth-icon"></i>
+                            <span class="auth-text">Accedi</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div id="mainContent" class="content-wrapper pt-5">
+            <!-- Contenitore principale della sezione di ricerca -->
+
+            <!-- Intestazione della sezione di ricerca -->
+            <div class="search-header mb-4 text-center">
+                <h2 class="display-6 fw-light mb-2">La tua prossima auto ti aspetta</h2>
+                <p class="text-muted fs-5">Cerca, confronta e prenota in pochi click</p>
+            </div>
+
+            <div class="search-fields">
+                <!-- Griglia innovativa per disporre i campi di input -->
+                <div class="innovative-grid">
+
+                    <!-- Campo per il luogo di ritiro -->
+                    <div class="input-wrapper" data-aos="fade-up">
+                        <div class="input-group">
+                            <!-- Icona per indicare il luogo di ritiro -->
+                            <span class="input-icon">
+                                <i class="fa-solid fa-map-marker-alt"></i>
+                            </span>
+                            <!-- Input per l'inserimento della città o aeroporto -->
+                            <input type="text" class="form-control input-field" id="pickupLocation"
+                                placeholder="Città o aeroporto" autocomplete="off">
+                            <!-- Dropdown per suggerimenti di autocompletamento -->
+                            <div class="autocomplete-dropdown"></div>
+                        </div>
+                        <div class="input-label">Luogo di ritiro</div>
+                    </div>
+
+                    <!-- Campo per la data di ritiro del veicolo -->
+                    <div class="input-wrapper" data-aos="fade-up" data-aos-delay="50">
+                        <div class="input-group">
+                            <!-- Icona per indicare la selezione della data -->
+                            <span class="input-icon">
+                                <i class="fa-solid fa-calendar-plus"></i>
+                            </span>
+                            <!-- Input per selezionare la data di ritiro con Flatpickr -->
+                            <input type="text" class="form-control input-field flatpickr-input" id="startDate"
+                                placeholder="Seleziona data">
+                        </div>
+                        <div class="input-label">Data di ritiro</div>
+                    </div>
+
+                    <!-- Campo per la data di restituzione del veicolo -->
+                    <div class="input-wrapper" data-aos="fade-up" data-aos-delay="100">
+                        <div class="input-group">
+                            <!-- Icona per indicare la selezione della data -->
+                            <span class="input-icon">
+                                <i class="fa-solid fa-calendar-minus"></i>
+                            </span>
+                            <!-- Input per selezionare la data di restituzione con Flatpickr -->
+                            <input type="text" class="form-control input-field flatpickr-input" id="endDate"
+                                placeholder="Seleziona data">
+                        </div>
+                        <div class="input-label">Data di restituzione</div>
+                    </div>
+
+                    <!-- Campo per il luogo di restituzione -->
+                    <div class="input-wrapper" data-aos="fade-up" data-aos-delay="150">
+                        <div class="input-group">
+                            <!-- Icona per indicare il luogo di restituzione -->
+                            <span class="input-icon">
+                                <i class="fa-solid fa-flag-checkered"></i>
+                            </span>
+                            <!-- Input per inserire la città o aeroporto di restituzione -->
+                            <input type="text" class="form-control input-field" id="returnLocation"
+                                placeholder="Città o aeroporto" autocomplete="off">
+                            <!-- Dropdown per suggerimenti di autocompletamento -->
+                            <div class="autocomplete-dropdown"></div>
+                        </div>
+                        <div class="input-label"> Luogo di restituzione</div>
+                    </div>
+                </div>
+
+                <!-- Bottone per avviare la ricerca delle auto disponibili -->
+                <div class="text-center mt-4">
+                    <button class="cta-button" onclick="searchCars()">
+                        <span class="button-content">
+                            <i class="fa-solid fa-search"></i>
+                            Mostra auto disponibili
+                        </span>
+                        <div class="button-overlay"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sezione per la lista delle auto disponibili -->
+        <div id="carList" class="row row-cols-1 row-cols-md-3 g-4 mt-4"></div>
+
+        <!-- 
+    Modale di pagamento (Payment Modal)
+    - Questo modal viene mostrato quando un utente vuole completare una prenotazione e inserire i dati di pagamento.
+    - La classe "modal fade" consente l'animazione di apertura/chiusura del modal con Bootstrap.
+    - Il modal è diviso in diverse sezioni per facilitare la compilazione dei dati necessari per la prenotazione.
+        -->
+        <div class="modal fade" id="paymentModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Intestazione del Modal -->
+                    <div class="modal-header bg-gradient-primary-to-secondary text-white">
+                        <h5 class="modal-title"><i class="fas fa-receipt"></i> Dati Prenotazione</h5>
+                        <!-- Pulsante per chiudere il modal -->
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Corpo del Modal -->
+                    <div class="modal-body">
+                        <form id="paymentForm">
+                            <div class="row g-4">
+
+                                <!-- Sezione Dati Personali -->
+                                <div class="col-md-12">
+                                    <div class="card border-primary shadow-sm">
+                                        <div class="card-header bg-light">
+                                            <h6 class="mb-0 text-primary"><i class="fa-solid fa-user-pen me-2"></i> Dati
+                                                Personali</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <!-- Nome e Cognome -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Nome</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Cognome</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
+
+                                                <!-- Data di Nascita -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Data di nascita</label>
+                                                    <input type="text" class="form-control flatpickr-input"
+                                                        id="birthDate" placeholder="Seleziona data" required>
+                                                </div>
+
+                                                <!-- Paese di Residenza -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Paese di residenza</label>
+                                                    <select class="form-select" required>
+                                                        <option value="">Seleziona...</option>
+                                                        <option>Italia</option>
+                                                        <option>Francia</option>
+                                                        <option>Spagna</option>
+                                                        <option>Germania</option>
+                                                        <option>Svizzera</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sezione Contatti -->
+                                <div class="col-md-12">
+                                    <div class="card border-primary shadow-sm">
+                                        <div class="card-header bg-light">
+                                            <h6 class="mb-0 text-primary"><i class="fa-solid fa-address-book me-2"></i>
+                                                Contatti</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <!-- Email e Cellulare -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Cellulare</label>
+                                                    <input type="text" class="form-control" required inputmode="numeric"
+                                                        pattern="[0-9]*">
+                                                </div>
+
+                                                <!-- Indirizzo, CAP e Città -->
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Indirizzo</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">CAP</label>
+                                                    <input type="text" class="form-control" required inputmode="numeric"
+                                                        pattern="[0-9]*">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Città</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sezione Documenti -->
+                                <div class="col-md-12">
+                                    <div class="card border-primary shadow-sm">
+                                        <div class="card-header bg-light">
+                                            <h6 class="mb-0 text-primary"><i class="fa-solid fa-file-contract me-2"></i>
+                                                Documenti</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <!-- Numero Patente e Scadenza -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Numero patente</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Scadenza patente</label>
+                                                    <input type="text" class="form-control flatpickr-input"
+                                                        id="licenseExpiry" placeholder="Seleziona data" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sezione Metodo di Pagamento -->
+                                <div class="col-md-12">
+                                    <div class="card border-primary shadow-sm">
+                                        <div class="card-header bg-light">
+                                            <h6 class="mb-0 text-primary"><i class="fa-solid fa-money-check-dollar"></i>
+                                                Metodo di Pagamento</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Tabs per i metodi di pagamento -->
+                                            <ul class="nav nav-pills mb-4">
+                                                <li class="nav-item">
+                                                    <button class="nav-link active" data-bs-toggle="pill"
+                                                        data-bs-target="#cards">
+                                                        <i class="fa-solid fa-credit-card me-2"></i> Carta di
+                                                        Credito/Debito
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <button class="nav-link" data-bs-toggle="pill"
+                                                        data-bs-target="#apple-pay">
+                                                        <i class="fa-brands fa-apple-pay me-2"></i> Apple Pay
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <button class="nav-link" data-bs-toggle="pill"
+                                                        data-bs-target="#google-pay">
+                                                        <i class="fa-brands fa-google-pay me-2"></i> Google Pay
+                                                    </button>
+                                                </li>
+                                            </ul>
+
+                                            <!-- Contenuto dei metodi di pagamento -->
+                                            <div class="tab-content">
+                                                <!-- Carta di Credito -->
+                                                <div class="tab-pane fade show active" id="cards" role="tabpanel">
+                                                    <div class="row g-3">
+                                                        <div class="col-12">
+                                                            <label class="form-label">Numero
+                                                                carta</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="1234 5678 9012 3456"
+                                                                    pattern="[0-9\s]{13,19}" maxlength="19" required>
+                                                                <span class="input-group-text">
+                                                                    <i class="fa-brands fa-cc-visa me-1"></i>
+                                                                    <i class="fa-brands fa-cc-mastercard me-1"></i>
+                                                                    <i class="fa-brands fa-cc-amex"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="form-label">Data
+                                                                di
+                                                                scadenza</label>
+                                                            <input type="text" class="form-control" placeholder="MM/AA"
+                                                                pattern="(0[1-9]|1[0-2])\/([0-9]{2})" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="form-label">CVV</label>
+                                                            <input type="text" class="form-control" placeholder="123"
+                                                                pattern="[0-9]{3,4}" maxlength="4" required>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label class="form-label">Nome
+                                                                sulla
+                                                                carta</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Nome Cognome" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Apple Pay -->
+                                                <div class="tab-pane fade" id="apple-pay">
+                                                    <button class="btn btn-dark btn-lg w-100 rounded-pill">
+                                                        <i class="fa-brands fa-apple me-2"></i> Paga con Apple Pay
+                                                    </button>
+                                                </div>
+                                                <!-- Google Pay -->
+                                                <div class="tab-pane fade" id="google-pay">
+                                                    <button class="btn btn-primary btn-lg w-100 rounded-pill">
+                                                        <i class="fa-brands fa-google me-2"></i> Paga con Google Pay
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Footer del Modal -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-close-modal" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-xmark"></i> Chiudi
+                        </button>
+                        <button type="submit" class="btn btn-payment" form="paymentForm">
+                            <i class="fas fa-badge-check"></i> Conferma Pagamento
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Modale per il Login e la Registrazione -->
+        <div class="modal fade" id="loginModal">
+            <!-- Contenitore del modale con allineamento centrato -->
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content overflow-hidden">
+
+                    <!-- Header del modale con gradiente di colore -->
+                    <div class="modal-header bg-gradient-primary-to-secondary text-white border-0 position-relative">
+                        <h5 class="modal-title fw-bold">Accedi o Registrati</h5>
+                        <!-- Pulsante per chiudere il modale -->
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        <!-- Decorazione con onda SVG per migliorare il design -->
+                        <div class="position-absolute w-100 bottom-0 start-0">
+                            <div class="wave-divider">
+                                <svg viewBox="0 0 500 20" preserveAspectRatio="none">
+                                    <path d="M0,0 C150,25 350,0 500,15 L500,20 L0,20 Z" fill="white"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Corpo del modale -->
+                    <div class="modal-body p-4 pt-5">
+
+                        <!-- Navigazione tra le schede di Login e Registrazione -->
+                        <ul class="nav nav-pills nav-fill gap-3 mb-4" id="authTabs">
+                            <!-- Tab per il Login -->
+                            <li class="nav-item">
+                                <a class="nav-link active rounded-pill py-2 fw-medium" data-bs-toggle="tab"
+                                    href="#login">
+                                    Accedi
+                                </a>
+                            </li>
+                            <!-- Tab per la Registrazione -->
+                            <li class="nav-item">
+                                <a class="nav-link rounded-pill py-2 fw-medium" data-bs-toggle="tab" href="#register">
+                                    Registrati
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Contenitore dei form -->
+                        <div class="tab-content">
+
+                            <!-- Scheda di Login -->
+                            <div class="tab-pane fade show active" id="login">
+                                <form id="loginForm" class="needs-validation" novalidate>
+                                    <div class="mb-3">
+                                        <div class="input-group">
+                                            <!-- Campo input per l'email -->
+                                            <input type="email" class="form-control rounded-end" name="email"
+                                                placeholder="Indirizzo email" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-group">
+                                            <!-- Campo input per la password -->
+                                            <input type="password" class="form-control rounded-end" name="password"
+                                                placeholder="Password" required>
+                                        </div>
+                                    </div>
+                                    <!-- Pulsante di invio per il Login -->
+                                    <button type="submit"
+                                        class="btn btn-gradient-primary-to-secondary text-white w-100 py-2 fw-bold rounded-pill">
+                                        <i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Accedi
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Scheda di Registrazione -->
+                            <div class="tab-pane fade" id="register">
+                                <form id="registerForm" class="needs-validation">
+                                    <div class="mb-3">
+                                        <div class="input-group">
+                                            <!-- Campo input per il nome completo -->
+                                            <input type="text" class="form-control rounded-end" name="full_name"
+                                                placeholder="Nome completo" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="input-group">
+                                            <!-- Campo input per l'email -->
+                                            <input type="email" class="form-control rounded-end" name="email"
+                                                placeholder="Indirizzo email" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="input-group">
+                                            <!-- Campo input per la password -->
+                                            <input type="password" class="form-control rounded-end" name="password"
+                                                placeholder="Password" required>
+                                        </div>
+                                    </div>
+                                    <!-- Pulsante di invio per la Registrazione -->
+                                    <button type="submit"
+                                        class="btn btn-gradient-primary-to-secondary text-white w-100 py-2 fw-bold rounded-pill">
+                                        <i class="fa-solid fa-user-plus me-2"></i>Registrati
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina di dettaglio della prenotazione -->
+        <div id="bookingDetailPage" class="container my-5" style="display: none;">
+            <!-- Card che contiene tutti i dettagli della prenotazione -->
+            <div class="card shadow-lg border-primary">
+
+                <!-- Header della card con il titolo e uno sfondo gradiente -->
+                <div class="card-header bg-gradient-primary-to-secondary text-white py-4">
+                    <h2 class="mb-0 fw-bold"><i class="fa-solid fa-circle-check me-2"></i>Riepilogo Prenotazione</h2>
+                </div>
+
+                <!-- Corpo della card contenente i dettagli della prenotazione -->
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <!-- Sezione con i dettagli della prenotazione -->
+                        <div class="col-md-6">
+                            <div class="bg-light rounded-3 p-4 h-100">
+                                <h4 class="text-primary mb-4 fw-semibold"><i
+                                        class="fa-solid fa-file-contract me-2"></i>Dettagli Prenotazione</h4>
+                                <ul class="list-group list-group-flush">
+                                    <!-- Dettaglio Ritiro -->
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                        <span><i class="fa-solid fa-location-dot text-primary me-2"></i>Ritiro</span>
+                                        <strong id="detailPickupLocation" class="text-end"></strong>
+                                    </li>
+
+                                    <!-- Dettaglio Restituzione -->
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                        <span><i
+                                                class="fa-solid fa-flag-checkered text-primary me-2"></i>Restituzione</span>
+                                        <strong id="detailReturnLocation" class="text-end"></strong>
+                                    </li>
+
+                                    <!-- Dettaglio Data Ritiro -->
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                        <span><i class="fa-solid fa-calendar-plus text-primary me-2"></i>Data
+                                            ritiro</span>
+                                        <strong id="detailStartDate" class="text-end"></strong>
+                                    </li>
+
+                                    <!-- Dettaglio Data Restituzione -->
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                        <span><i class="fa-solid fa-calendar-minus text-primary me-2"></i>Data
+                                            restituzione</span>
+                                        <strong id="detailEndDate" class="text-end"></strong>
+                                    </li>
+
+                                    <!-- Dettaglio Tariffa Giornaliera -->
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                        <span><i class="fa-solid fa-tag text-primary me-2"></i>Tariffa
+                                            giornaliera</span>
+                                        <span class="badge bg-primary rounded-pill fs-6" id="detailCarPrice"></span>
+                                    </li>
+
+                                    <!-- Dettaglio Totale della Prenotazione -->
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent pt-3">
+                                        <span><i class="fa-solid fa-receipt text-primary me-2"></i>Totale</span>
+                                        <span class="badge bg-success rounded-pill fs-5" id="detailTotalPrice"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Sezione con i dettagli dell'auto -->
+                        <div class="col-md-6">
+                            <div class="h-100">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="position-relative">
+                                        <!-- Immagine dell'auto -->
+                                        <img id="detailCarImage" src class="card-img-top rounded-top-3" alt="Car Image"
+                                            style="height: 250px; object-fit: contain"
+                                            onerror="this.src='https://via.placeholder.com/800x500/007bff/ffffff?text=Auto+Non+Disponibile'">
+                                        <!-- Etichetta Premium in alto a destra -->
+                                        <span
+                                            class="position-absolute top-0 end-0 bg-dark bg-opacity-75 text-white px-3 py-2 rounded-bl-3">
+                                            <i class="fa-solid fa-star me-2"></i>Premium
+                                        </span>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <!-- Titolo dell'auto -->
+                                        <h3 class="card-title mb-4 fw-bold text-primary" id="detailCarTitle"></h3>
+
+                                        <div class="row g-3">
+                                            <!-- Tipo dell'auto -->
+                                            <div class="col-6">
+                                                <div class="bg-light rounded-2 p-3 text-center">
+                                                    <i class="fa-solid fa-car-side fs-4 text-primary mb-2"></i>
+                                                    <div class="fw-medium">Tipo</div>
+                                                    <div id="detailCarType" class="text-muted small"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Numero di posti dell'auto -->
+                                            <div class="col-6">
+                                                <div class="bg-light rounded-2 p-3 text-center">
+                                                    <i class="fa-solid fa-users fs-4 text-primary mb-2"></i>
+                                                    <div class="fw-medium">Posti</div>
+                                                    <div id="detailCarSeats" class="text-muted small"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Tipo di cambio dell'auto -->
+                                            <div class="col-6">
+                                                <div class="bg-light rounded-2 p-3 text-center">
+                                                    <i class="fa-solid fa-gear fs-4 text-primary mb-2"></i>
+                                                    <div class="fw-medium">Cambio</div>
+                                                    <div id="detailCarTransmission" class="text-muted small"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Tipo di alimentazione dell'auto -->
+                                            <div class="col-6">
+                                                <div class="bg-light rounded-2 p-3 text-center">
+                                                    <i class="fa-solid fa-gas-pump fs-4 text-primary mb-2"></i>
+                                                    <div class="fw-medium">Alimentazione</div>
+                                                    <div id="detailCarFuel" class="text-muted small"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Anno di produzione dell'auto -->
+                                            <div class="col-6">
+                                                <div class="bg-light rounded-2 p-3 text-center">
+                                                    <i class="fa-solid fa-calendar-alt fs-4 text-primary mb-2"></i>
+                                                    <div class="fw-medium">Anno</div>
+                                                    <div id="detailCarYear" class="text-muted small"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sezione per le azioni disponibili -->
+                        <div class="mt-5 d-grid gap-3">
+                            <!-- Pulsante per completare la prenotazione (modale di pagamento) -->
+                            <button class="btn btn-lg btn-gradient-primary-to-secondary text-white fw-bold py-3"
+                                data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                <i class="fa-solid fa-bookmark"></i>Completa Prenotazione
+                            </button>
+
+                            <!-- Pulsante per tornare alla pagina di ricerca -->
+                            <button class="btn btn-outline-primary" onclick="document.getElementById('mainContent').style.display = 'block'; 
+                         document.getElementById('bookingDetailPage').style.display = 'none';
+                         window.scrollTo({top: 0, behavior: 'smooth'})">
+                                <i class="fa-solid fa-arrow-left me-2"></i>Torna alla Ricerca
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modale per inviare mail all'assistenza -->
+    <div class="modal fade" id="contactModal">
+        <!-- Dialogo della modale centrato verticalmente -->
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <!-- Header della modale con sfondo gradiente e icona -->
+                <div class="modal-header bg-gradient-primary-to-secondary text-white border-0 position-relative">
+                    <!-- Titolo della modale -->
+                    <h5 class="modal-title fw-bold">
+                        <i class="fa-solid fa-envelope me-2"></i>Contattaci
+                    </h5>
+                    <!-- Pulsante per chiudere la modale -->
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+
+                    <!-- Decorazione visiva in basso (onde) -->
+                    <div class="position-absolute w-100 bottom-0 start-0">
+                        <div class="wave-divider">
+                            <svg viewBox="0 0 500 20" preserveAspectRatio="none">
+                                <path d="M0,0 C150,25 350,0 500,15 L500,20 L0,20 Z" fill="white"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form per inviare il messaggio -->
+                <form id="contactForm">
+                    <div class="modal-body p-4 pt-5">
+                        <!-- Campo per inserire l'email -->
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-primary">La tua email</label>
+                            <input type="email" class="form-control border-start-0 ps-2" placeholder="esempio@email.com"
+                                required>
+                        </div>
+
+                        <!-- Campo per inserire l'oggetto del messaggio -->
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-primary">Oggetto</label>
+                            <input type="text" class="form-control border-start-0 ps-2"
+                                placeholder="Oggetto del messaggio" required>
+                        </div>
+
+                        <!-- Campo per scrivere il messaggio -->
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-primary">Messaggio</label>
+                            <textarea class="form-control border-start-0 ps-2" rows="5"
+                                placeholder="Scrivi il tuo messaggio" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Footer della modale con il pulsante per inviare il messaggio -->
+                    <div class="modal-footer">
+                        <button type="submit"
+                            class="btn btn-gradient-primary-to-secondary text-white w-100 py-2 fw-bold rounded-pill">Invia
+                            Messaggio</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale per la ricerca della propria prenotazione -->
+    <div class="modal fade" id="searchModal">
+        <!-- Dialogo della modale centrato verticalmente -->
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <!-- Header della modale con sfondo gradiente e icona di ricerca -->
+                <div class="modal-header bg-gradient-primary-to-secondary text-white border-0 position-relative">
+                    <!-- Titolo della modale con icona -->
+                    <h5 class="modal-title fw-bold">
+                        <i class="fa-solid fa-magnifying-glass me-2"></i>Cerca e Gestisci la tua Prenotazione
+                    </h5>
+                    <!-- Pulsante per chiudere la modale -->
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+
+                    <!-- Decorazione visiva in basso (onde) -->
+                    <div class="position-absolute w-100 bottom-0 start-0">
+                        <div class="wave-divider">
+                            <svg viewBox="0 0 500 20" preserveAspectRatio="none">
+                                <path d="M0,0 C150,25 350,0 500,15 L500,20 L0,20 Z" fill="white"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corpo del Modal -->
+                <div class="modal-body p-4 pt-5">
+                    <!-- Form di ricerca della prenotazione -->
+                    <form id="searchBookingForm" onsubmit="searchBooking(event)">
+                        <!-- Campo per l'indirizzo email -->
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-primary">Indirizzo Email</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control border-start-0 ps-2" id="searchEmail"
+                                    placeholder="esempio@email.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Campo per il codice prenotazione -->
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-primary">Codice Prenotazione</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control border-start-0 ps-2" id="searchCode"
+                                    placeholder="Inserisci il codice" required>
+                            </div>
+                        </div>
+
+                        <!-- Pulsante per inviare la ricerca -->
+                        <button type="submit"
+                            class="btn btn-gradient-primary-to-secondary text-white w-100 py-2 fw-bold rounded-pill">
+                            Cerca Prenotazione
+                        </button>
+                    </form>
+
+                    <!-- Footer con avviso sull'uso del codice di prenotazione -->
+                    <div class="mt-4 pt-3 border-top text-center">
+                        <p class="small text-muted mb-0">
+                            <i class="fa-solid fa-circle-info text-primary me-2"></i>
+                            Il codice prenotazione si trova nella mail di
+                            conferma ricevuta al momento della prenotazione.
+                            Controlla anche la cartella spam/posta
+                            indesiderata.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dettagli della Prenotazione -->
+    <div id="bookingDetails" class="container my-5" style="display: none;">
+        <!-- Card principale per visualizzare i dettagli della prenotazione -->
+        <div class="card shadow-lg border-primary">
+            <!-- Header della card con titolo e codice prenotazione -->
+            <div class="card-header bg-gradient-primary-to-secondary text-white py-4">
+                <h2 class="mb-0 fw-bold">
+                    <!-- Icona di conferma prenotazione -->
+                    <i class="fa-solid fa-circle-check me-2"></i>Dettagli Prenotazione
+                    <!-- Codice della prenotazione -->
+                    <span id="bookingCode"></span>
+                </h2>
+            </div>
+            <!-- Corpo della card con informazioni dettagliate sulla prenotazione -->
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <!-- Sezione Dettagli Prenotazione (a sinistra) -->
+                    <div class="col-md-6">
+                        <div class="bg-light rounded-3 p-4 h-100">
+                            <h4 class="text-primary mb-4 fw-semibold"><i
+                                    class="fa-solid fa-file-contract me-2"></i>Dettagli Prenotazione</h4>
+                            <ul class="list-group list-group-flush">
+                                <!-- Dettaglio Ritiro (posizione e data) -->
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                    <span><i class="fa-solid fa-location-dot text-primary me-2"></i>Ritiro</span>
+                                    <strong id="bookingPickupLocation" class="text-end"></strong>
+                                </li>
+                                <!-- Dettaglio Restituzione (posizione e data) -->
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                    <span><i
+                                            class="fa-solid fa-flag-checkered text-primary me-2"></i>Restituzione</span>
+                                    <strong id="bookingReturnLocation" class="text-end"></strong>
+                                </li>
+                                <!-- Data di Ritiro -->
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                    <span><i class="fa-solid fa-calendar-plus text-primary me-2"></i>Data ritiro</span>
+                                    <strong id="bookingStartDate" class="text-end"></strong>
+                                </li>
+                                <!-- Data di Restituzione -->
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                    <span><i class="fa-solid fa-calendar-minus text-primary me-2"></i>Data
+                                        restituzione</span>
+                                    <strong id="bookingEndDate" class="text-end"></strong>
+                                </li>
+                                <!-- Tariffa Giornaliera -->
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom py-3">
+                                    <span><i class="fa-solid fa-tag text-primary me-2"></i>Tariffa giornaliera</span>
+                                    <span class="badge bg-primary rounded-pill fs-6" id="bookingCarPrice"></span>
+                                </li>
+                                <!-- Totale -->
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center bg-transparent pt-3">
+                                    <span><i class="fa-solid fa-receipt text-primary me-2"></i>Totale</span>
+                                    <span class="badge bg-success rounded-pill fs-5" id="bookingTotalPrice"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sezione Dettagli Auto (a destra) -->
+                    <div class="col-md-6">
+                        <div class="h-100">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="position-relative">
+                                    <!-- Immagine dell'auto con un testo "Premium" -->
+                                    <img id="bookingCarImage" src class="card-img-top rounded-top-3" alt="Car Image"
+                                        style="height: 250px; object-fit: contain"
+                                        onerror="this.src='https://via.placeholder.com/800x500/007bff/ffffff?text=Auto+Non+Disponibile'">
+                                    <span
+                                        class="position-absolute top-0 end-0 bg-dark bg-opacity-75 text-white px-3 py-2 rounded-bl-3">
+                                        <i class="fa-solid fa-star me-2"></i>Premium
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Titolo dell'auto -->
+                                    <h3 class="card-title mb-4 fw-bold text-primary" id="bookingCarTitle"></h3>
+                                    <!-- Caratteristiche dell'auto -->
+                                    <div class="row g-3">
+                                        <!-- Tipo di auto -->
+                                        <div class="col-6">
+                                            <div class="bg-light rounded-2 p-3 text-center">
+                                                <i class="fa-solid fa-car-side fs-4 text-primary mb-2"></i>
+                                                <div class="fw-medium">Tipo</div>
+                                                <div id="bookingCarType" class="text-muted small"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Posti dell'auto -->
+                                        <div class="col-6">
+                                            <div class="bg-light rounded-2 p-3 text-center">
+                                                <i class="fa-solid fa-users fs-4 text-primary mb-2"></i>
+                                                <div class="fw-medium">Posti</div>
+                                                <div id="bookingCarSeats" class="text-muted small"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Tipo di cambio (manuale o automatico) -->
+                                        <div class="col-6">
+                                            <div class="bg-light rounded-2 p-3 text-center">
+                                                <i class="fa-solid fa-gear fs-4 text-primary mb-2"></i>
+                                                <div class="fw-medium">Cambio</div>
+                                                <div id="bookingCarTransmission" class="text-muted small"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Tipo di alimentazione (benzina, diesel, ecc.) -->
+                                        <div class="col-6">
+                                            <div class="bg-light rounded-2 p-3 text-center">
+                                                <i class="fa-solid fa-gas-pump fs-4 text-primary mb-2"></i>
+                                                <div class="fw-medium">Alimentazione</div>
+                                                <div id="bookingCarFuel" class="text-muted small"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Anno dell'auto -->
+                                        <div class="col-6">
+                                            <div class="bg-light rounded-2 p-3 text-center">
+                                                <i class="fa-solid fa-calendar-alt fs-4 text-primary mb-2"></i>
+                                                <div class="fw-medium">Anno</div>
+                                                <div id="bookingCarYear" class="text-muted small"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sezione con i pulsanti principali per l'utente -->
+                    <div class="mt-5 d-grid gap-3" id="mainButtons"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-1 mt-auto">
+        <div class="container d-flex justify-content-between align-items-center">
+            <p class="mb-0">&copy; 2025 Autorent24/7. Tutti i
+                diritti riservati.</p>
+            <div>
+                <a href="#" class="text-white text-decoration-none px-2">Termini
+                    e Condizioni</a> |
+                <a href="#" class="text-white text-decoration-none px-2">Privacy</a>
+                |
+                <a href="#" class="text-white text-decoration-none px-2">Cookie
+                    Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alert personalizzato per notifiche -->
+    <div id="customAlert" class="alert alert-dismissible fade" role="alert"
+        style="position: fixed; top: 75px; right: 20px; z-index: 9999; min-width: 350px;">
+        <!-- Contenuto dell'alert -->
+        <div class="d-flex align-items-center">
+            <!-- Icona dell'alert (cambia dinamicamente tramite JavaScript) -->
+            <span id="alertIcon" class="me-3"></span>
+
+            <div>
+                <!-- Titolo dell'alert (cambia dinamicamente tramite JavaScript) -->
+                <h6 id="alertTitle" class="alert-heading mb-1"></h6>
+                <!-- Messaggio dell'alert (cambia dinamicamente tramite JavaScript) -->
+                <span id="alertMessage"></span>
+            </div>
+
+            <!-- Bottone di chiusura dell'alert -->
+            <button type="button" class="btn-close ms-3" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+    <!-- Inclusione della libreria Bootstrap (JavaScript) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Inclusione di Flatpickr per il selettore di data -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+    <!-- Inclusione della localizzazione italiana per Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/it.js"></script>
+
+
+    <!-- Inclusione file JavaScript personalizzato -->
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
