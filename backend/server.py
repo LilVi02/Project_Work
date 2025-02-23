@@ -17,7 +17,7 @@ app = Flask(__name__, static_folder='../frontend',
 CORS(app)  # Abilita CORS per permettere richieste cross-origin
 
 # Configurazioni per l'invio delle email tramite SendGrid
-SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = "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"
 DEFAULT_SENDER = "autorent24.7@workmail.com"
 
 # Funzione per l'invio delle email
